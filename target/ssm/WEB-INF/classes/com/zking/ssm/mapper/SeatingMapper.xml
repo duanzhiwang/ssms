@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.SeatingMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Seating" >
+    <constructor >
+      <idArg column="seating_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="seat_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="seating_status" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    seating_id, seat_id, seating_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_seating
+    where seating_id = #{seatingId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_seating
+    where seating_id = #{seatingId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Seating" >
+    insert into t_seating (seating_id, seat_id, seating_status
+      )
+    values (#{seatingId,jdbcType=INTEGER}, #{seatId,jdbcType=INTEGER}, #{seatingStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Seating" >
+    insert into t_seating
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seatingId != null" >
+        seating_id,
+      </if>
+      <if test="seatId != null" >
+        seat_id,
+      </if>
+      <if test="seatingStatus != null" >
+        seating_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seatingId != null" >
+        #{seatingId,jdbcType=INTEGER},
+      </if>
+      <if test="seatId != null" >
+        #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="seatingStatus != null" >
+        #{seatingStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Seating" >
+    update t_seating
+    <set >
+      <if test="seatId != null" >
+        seat_id = #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="seatingStatus != null" >
+        seating_status = #{seatingStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seating_id = #{seatingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Seating" >
+    update t_seating
+    set seat_id = #{seatId,jdbcType=INTEGER},
+      seating_status = #{seatingStatus,jdbcType=VARCHAR}
+    where seating_id = #{seatingId,jdbcType=INTEGER}
+  </update>
+</mapper>

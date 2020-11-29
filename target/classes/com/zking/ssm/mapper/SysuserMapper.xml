@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.SysuserMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Sysuser" >
+    <constructor >
+      <idArg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="usr_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="usr_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="usr_flag" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, usr_name, usr_password, usr_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_sys_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Sysuser" >
+    insert into t_sys_user (user_id, usr_name, usr_password, 
+      usr_flag)
+    values (#{userId,jdbcType=INTEGER}, #{usrName,jdbcType=VARCHAR}, #{usrPassword,jdbcType=VARCHAR}, 
+      #{usrFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Sysuser" >
+    insert into t_sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="usrName != null" >
+        usr_name,
+      </if>
+      <if test="usrPassword != null" >
+        usr_password,
+      </if>
+      <if test="usrFlag != null" >
+        usr_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="usrName != null" >
+        #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="usrPassword != null" >
+        #{usrPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usrFlag != null" >
+        #{usrFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Sysuser" >
+    update t_sys_user
+    <set >
+      <if test="usrName != null" >
+        usr_name = #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="usrPassword != null" >
+        usr_password = #{usrPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usrFlag != null" >
+        usr_flag = #{usrFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Sysuser" >
+    update t_sys_user
+    set usr_name = #{usrName,jdbcType=VARCHAR},
+      usr_password = #{usrPassword,jdbcType=VARCHAR},
+      usr_flag = #{usrFlag,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

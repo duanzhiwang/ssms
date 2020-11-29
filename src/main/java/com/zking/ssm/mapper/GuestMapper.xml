@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.GuestMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Guest" >
+    <constructor >
+      <idArg column="guest_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="room_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="guest_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="guest_picture" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="guest_particuiars" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="guest_status" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    guest_id, room_id, guest_price, guest_picture, guest_particuiars, guest_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_guest
+    where guest_id = #{guestId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_guest
+    where guest_id = #{guestId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Guest" >
+    insert into t_guest (guest_id, room_id, guest_price, 
+      guest_picture, guest_particuiars, guest_status
+      )
+    values (#{guestId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, #{guestPrice,jdbcType=DECIMAL}, 
+      #{guestPicture,jdbcType=VARCHAR}, #{guestParticuiars,jdbcType=VARCHAR}, #{guestStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Guest" >
+    insert into t_guest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="guestId != null" >
+        guest_id,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="guestPrice != null" >
+        guest_price,
+      </if>
+      <if test="guestPicture != null" >
+        guest_picture,
+      </if>
+      <if test="guestParticuiars != null" >
+        guest_particuiars,
+      </if>
+      <if test="guestStatus != null" >
+        guest_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="guestId != null" >
+        #{guestId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="guestPrice != null" >
+        #{guestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="guestPicture != null" >
+        #{guestPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="guestParticuiars != null" >
+        #{guestParticuiars,jdbcType=VARCHAR},
+      </if>
+      <if test="guestStatus != null" >
+        #{guestStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Guest" >
+    update t_guest
+    <set >
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="guestPrice != null" >
+        guest_price = #{guestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="guestPicture != null" >
+        guest_picture = #{guestPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="guestParticuiars != null" >
+        guest_particuiars = #{guestParticuiars,jdbcType=VARCHAR},
+      </if>
+      <if test="guestStatus != null" >
+        guest_status = #{guestStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where guest_id = #{guestId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Guest" >
+    update t_guest
+    set room_id = #{roomId,jdbcType=INTEGER},
+      guest_price = #{guestPrice,jdbcType=DECIMAL},
+      guest_picture = #{guestPicture,jdbcType=VARCHAR},
+      guest_particuiars = #{guestParticuiars,jdbcType=VARCHAR},
+      guest_status = #{guestStatus,jdbcType=VARCHAR}
+    where guest_id = #{guestId,jdbcType=INTEGER}
+  </update>
+</mapper>

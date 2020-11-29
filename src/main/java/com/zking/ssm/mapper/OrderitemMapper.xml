@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.OrderitemMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Orderitem" >
+    <constructor >
+      <idArg column="order_item_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="guest_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_item_quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_item_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="order_item_check" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="order_item_retreat" jdbcType="DATE" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_item_id, order_id, guest_id, order_item_quantity, order_item_price, order_item_check, 
+    order_item_retreat
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_item
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_order_item
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Orderitem" >
+    insert into t_order_item (order_item_id, order_id, guest_id, 
+      order_item_quantity, order_item_price, order_item_check, 
+      order_item_retreat)
+    values (#{orderItemId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{guestId,jdbcType=INTEGER}, 
+      #{orderItemQuantity,jdbcType=INTEGER}, #{orderItemPrice,jdbcType=DECIMAL}, #{orderItemCheck,jdbcType=DATE}, 
+      #{orderItemRetreat,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Orderitem" >
+    insert into t_order_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderItemId != null" >
+        order_item_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="guestId != null" >
+        guest_id,
+      </if>
+      <if test="orderItemQuantity != null" >
+        order_item_quantity,
+      </if>
+      <if test="orderItemPrice != null" >
+        order_item_price,
+      </if>
+      <if test="orderItemCheck != null" >
+        order_item_check,
+      </if>
+      <if test="orderItemRetreat != null" >
+        order_item_retreat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderItemId != null" >
+        #{orderItemId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="guestId != null" >
+        #{guestId,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemQuantity != null" >
+        #{orderItemQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemPrice != null" >
+        #{orderItemPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderItemCheck != null" >
+        #{orderItemCheck,jdbcType=DATE},
+      </if>
+      <if test="orderItemRetreat != null" >
+        #{orderItemRetreat,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Orderitem" >
+    update t_order_item
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="guestId != null" >
+        guest_id = #{guestId,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemQuantity != null" >
+        order_item_quantity = #{orderItemQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemPrice != null" >
+        order_item_price = #{orderItemPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderItemCheck != null" >
+        order_item_check = #{orderItemCheck,jdbcType=DATE},
+      </if>
+      <if test="orderItemRetreat != null" >
+        order_item_retreat = #{orderItemRetreat,jdbcType=DATE},
+      </if>
+    </set>
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Orderitem" >
+    update t_order_item
+    set order_id = #{orderId,jdbcType=INTEGER},
+      guest_id = #{guestId,jdbcType=INTEGER},
+      order_item_quantity = #{orderItemQuantity,jdbcType=INTEGER},
+      order_item_price = #{orderItemPrice,jdbcType=DECIMAL},
+      order_item_check = #{orderItemCheck,jdbcType=DATE},
+      order_item_retreat = #{orderItemRetreat,jdbcType=DATE}
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </update>
+</mapper>

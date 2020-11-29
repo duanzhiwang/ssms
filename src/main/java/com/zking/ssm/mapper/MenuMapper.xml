@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Menu" >
+    <constructor >
+      <idArg column="menu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="greens_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="menu_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="menu_picture" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="menu_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    menu_id, greens_id, menu_name, menu_picture, menu_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Menu" >
+    insert into t_menu (menu_id, greens_id, menu_name, 
+      menu_picture, menu_price)
+    values (#{menuId,jdbcType=INTEGER}, #{greensId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuPicture,jdbcType=VARCHAR}, #{menuPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Menu" >
+    insert into t_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="greensId != null" >
+        greens_id,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuPicture != null" >
+        menu_picture,
+      </if>
+      <if test="menuPrice != null" >
+        menu_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="greensId != null" >
+        #{greensId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPicture != null" >
+        #{menuPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPrice != null" >
+        #{menuPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Menu" >
+    update t_menu
+    <set >
+      <if test="greensId != null" >
+        greens_id = #{greensId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPicture != null" >
+        menu_picture = #{menuPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPrice != null" >
+        menu_price = #{menuPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Menu" >
+    update t_menu
+    set greens_id = #{greensId,jdbcType=INTEGER},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_picture = #{menuPicture,jdbcType=VARCHAR},
+      menu_price = #{menuPrice,jdbcType=DECIMAL}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+</mapper>

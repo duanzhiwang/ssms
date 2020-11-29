@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.GreensMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Greens" >
+    <constructor >
+      <idArg column="greens_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="greens_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    greens_id, greens_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_greens
+    where greens_id = #{greensId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_greens
+    where greens_id = #{greensId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Greens" >
+    insert into t_greens (greens_id, greens_type)
+    values (#{greensId,jdbcType=INTEGER}, #{greensType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Greens" >
+    insert into t_greens
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="greensId != null" >
+        greens_id,
+      </if>
+      <if test="greensType != null" >
+        greens_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="greensId != null" >
+        #{greensId,jdbcType=INTEGER},
+      </if>
+      <if test="greensType != null" >
+        #{greensType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Greens" >
+    update t_greens
+    <set >
+      <if test="greensType != null" >
+        greens_type = #{greensType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where greens_id = #{greensId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Greens" >
+    update t_greens
+    set greens_type = #{greensType,jdbcType=VARCHAR}
+    where greens_id = #{greensId,jdbcType=INTEGER}
+  </update>
+</mapper>

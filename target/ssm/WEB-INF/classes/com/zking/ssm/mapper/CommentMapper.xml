@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Comment" >
+    <constructor >
+      <idArg column="comment_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="guest_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="comment_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="commemt_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    comment_id, guest_id, user_id, comment_content, commemt_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from t_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Comment" >
+    insert into t_comment (comment_id, guest_id, user_id,
+      comment_content, commemt_date)
+    values (#{commentId,jdbcType=INTEGER}, #{guestId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+      #{commentContent,jdbcType=VARCHAR}, #{commemtDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Comment" >
+    insert into t_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        comment_id,
+      </if>
+      <if test="guestId != null" >
+        guest_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="commentContent != null" >
+        comment_content,
+      </if>
+      <if test="commemtDate != null" >
+        commemt_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="guestId != null" >
+        #{guestId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commemtDate != null" >
+        #{commemtDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Comment" >
+    update t_comment
+    <set >
+      <if test="guestId != null" >
+        guest_id = #{guestId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null" >
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commemtDate != null" >
+        commemt_date = #{commemtDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Comment" >
+    update t_comment
+    set guest_id = #{guestId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      commemt_date = #{commemtDate,jdbcType=TIMESTAMP}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+</mapper>

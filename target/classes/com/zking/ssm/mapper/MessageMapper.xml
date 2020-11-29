@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Message" >
+    <constructor >
+      <idArg column="message_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="message_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="message_sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="message_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="message_identity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="message_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    message_id, message_name, message_sex, message_phone, message_identity, message_date, 
+    user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Message" >
+    insert into t_message (message_id, message_name, message_sex, 
+      message_phone, message_identity, message_date, 
+      user_id)
+    values (#{messageId,jdbcType=INTEGER}, #{messageName,jdbcType=VARCHAR}, #{messageSex,jdbcType=VARCHAR}, 
+      #{messagePhone,jdbcType=VARCHAR}, #{messageIdentity,jdbcType=VARCHAR}, #{messageDate,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Message" >
+    insert into t_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="messageName != null" >
+        message_name,
+      </if>
+      <if test="messageSex != null" >
+        message_sex,
+      </if>
+      <if test="messagePhone != null" >
+        message_phone,
+      </if>
+      <if test="messageIdentity != null" >
+        message_identity,
+      </if>
+      <if test="messageDate != null" >
+        message_date,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="messageName != null" >
+        #{messageName,jdbcType=VARCHAR},
+      </if>
+      <if test="messageSex != null" >
+        #{messageSex,jdbcType=VARCHAR},
+      </if>
+      <if test="messagePhone != null" >
+        #{messagePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="messageIdentity != null" >
+        #{messageIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="messageDate != null" >
+        #{messageDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Message" >
+    update t_message
+    <set >
+      <if test="messageName != null" >
+        message_name = #{messageName,jdbcType=VARCHAR},
+      </if>
+      <if test="messageSex != null" >
+        message_sex = #{messageSex,jdbcType=VARCHAR},
+      </if>
+      <if test="messagePhone != null" >
+        message_phone = #{messagePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="messageIdentity != null" >
+        message_identity = #{messageIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="messageDate != null" >
+        message_date = #{messageDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Message" >
+    update t_message
+    set message_name = #{messageName,jdbcType=VARCHAR},
+      message_sex = #{messageSex,jdbcType=VARCHAR},
+      message_phone = #{messagePhone,jdbcType=VARCHAR},
+      message_identity = #{messageIdentity,jdbcType=VARCHAR},
+      message_date = #{messageDate,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+</mapper>
