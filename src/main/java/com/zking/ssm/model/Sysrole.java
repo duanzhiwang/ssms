@@ -1,7 +1,6 @@
 package com.zking.ssm.model;
 
 public class Sysrole {
-//    系统角色表
     private Integer roleId;
 
     private String roleName;
