@@ -6,11 +6,11 @@
       <idArg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="usr_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="usr_password" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="usr_flag" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="usr_salt" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, usr_name, usr_password, usr_flag
+    user_id, usr_name, usr_password, usr_salt
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,9 +24,9 @@
   </delete>
   <insert id="insert" parameterType="com.zking.ssm.model.Sysuser" >
     insert into t_sys_user (user_id, usr_name, usr_password, 
-      usr_flag)
+      usr_salt)
     values (#{userId,jdbcType=INTEGER}, #{usrName,jdbcType=VARCHAR}, #{usrPassword,jdbcType=VARCHAR}, 
-      #{usrFlag,jdbcType=VARCHAR})
+      #{usrSalt,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zking.ssm.model.Sysuser" >
     insert into t_sys_user
@@ -40,8 +40,8 @@
       <if test="usrPassword != null" >
         usr_password,
       </if>
-      <if test="usrFlag != null" >
-        usr_flag,
+      <if test="usrSalt != null" >
+        usr_salt,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -54,8 +54,8 @@
       <if test="usrPassword != null" >
         #{usrPassword,jdbcType=VARCHAR},
       </if>
-      <if test="usrFlag != null" >
-        #{usrFlag,jdbcType=VARCHAR},
+      <if test="usrSalt != null" >
+        #{usrSalt,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -68,8 +68,8 @@
       <if test="usrPassword != null" >
         usr_password = #{usrPassword,jdbcType=VARCHAR},
       </if>
-      <if test="usrFlag != null" >
-        usr_flag = #{usrFlag,jdbcType=VARCHAR},
+      <if test="usrSalt != null" >
+        usr_salt = #{usrSalt,jdbcType=VARCHAR},
       </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
@@ -78,7 +78,7 @@
     update t_sys_user
     set usr_name = #{usrName,jdbcType=VARCHAR},
       usr_password = #{usrPassword,jdbcType=VARCHAR},
-      usr_flag = #{usrFlag,jdbcType=VARCHAR}
+      usr_salt = #{usrSalt,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>
