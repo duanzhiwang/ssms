@@ -1,20 +1,19 @@
 package com.zking.ssm.model;
 
 public class Sysuser {
-//    系统用户表
     private Integer userId;
 
     private String usrName;
 
     private String usrPassword;
 
-    private String usrFlag;
+    private String usrSalt;
 
-    public Sysuser(Integer userId, String usrName, String usrPassword, String usrFlag) {
+    public Sysuser(Integer userId, String usrName, String usrPassword, String usrSalt) {
         this.userId = userId;
         this.usrName = usrName;
         this.usrPassword = usrPassword;
-        this.usrFlag = usrFlag;
+        this.usrSalt = usrSalt;
     }
 
     public Sysuser() {
@@ -45,11 +44,11 @@ public class Sysuser {
         this.usrPassword = usrPassword;
     }
 
-    public String getUsrFlag() {
-        return usrFlag;
+    public String getUsrSalt() {
+        return usrSalt;
     }
 
-    public void setUsrFlag(String usrFlag) {
-        this.usrFlag = usrFlag;
+    public void setUsrSalt(String usrSalt) {
+        this.usrSalt = usrSalt;
     }
 }
