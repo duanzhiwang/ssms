@@ -3,106 +3,93 @@
 <mapper namespace="com.zking.ssm.mapper.SysrightMapper" >
   <resultMap id="BaseResultMap" type="com.zking.ssm.model.Sysright" >
     <constructor >
-      <idArg column="right_code" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="right_parent_code" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="right_type" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="right_text" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <idArg column="perid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pername" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="permission" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="right_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="right_tip" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    right_code, right_parent_code, right_type, right_text, right_url, right_tip
+    perid, pername, pid, permission, right_url
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from t_sys_right
-    where right_code = #{rightCode,jdbcType=VARCHAR}
+    where perid = #{perid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_sys_right
-    where right_code = #{rightCode,jdbcType=VARCHAR}
+    where perid = #{perid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zking.ssm.model.Sysright" >
-    insert into t_sys_right (right_code, right_parent_code, right_type, 
-      right_text, right_url, right_tip
-      )
-    values (#{rightCode,jdbcType=VARCHAR}, #{rightParentCode,jdbcType=VARCHAR}, #{rightType,jdbcType=VARCHAR}, 
-      #{rightText,jdbcType=VARCHAR}, #{rightUrl,jdbcType=VARCHAR}, #{rightTip,jdbcType=VARCHAR}
-      )
+    insert into t_sys_right (perid, pername, pid, 
+      permission, right_url)
+    values (#{perid,jdbcType=INTEGER}, #{pername,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, 
+      #{permission,jdbcType=VARCHAR}, #{rightUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zking.ssm.model.Sysright" >
     insert into t_sys_right
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="rightCode != null" >
-        right_code,
+      <if test="perid != null" >
+        perid,
       </if>
-      <if test="rightParentCode != null" >
-        right_parent_code,
+      <if test="pername != null" >
+        pername,
       </if>
-      <if test="rightType != null" >
-        right_type,
+      <if test="pid != null" >
+        pid,
       </if>
-      <if test="rightText != null" >
-        right_text,
+      <if test="permission != null" >
+        permission,
       </if>
       <if test="rightUrl != null" >
         right_url,
       </if>
-      <if test="rightTip != null" >
-        right_tip,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="rightCode != null" >
-        #{rightCode,jdbcType=VARCHAR},
+      <if test="perid != null" >
+        #{perid,jdbcType=INTEGER},
       </if>
-      <if test="rightParentCode != null" >
-        #{rightParentCode,jdbcType=VARCHAR},
+      <if test="pername != null" >
+        #{pername,jdbcType=VARCHAR},
       </if>
-      <if test="rightType != null" >
-        #{rightType,jdbcType=VARCHAR},
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
       </if>
-      <if test="rightText != null" >
-        #{rightText,jdbcType=VARCHAR},
+      <if test="permission != null" >
+        #{permission,jdbcType=VARCHAR},
       </if>
       <if test="rightUrl != null" >
         #{rightUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="rightTip != null" >
-        #{rightTip,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Sysright" >
     update t_sys_right
     <set >
-      <if test="rightParentCode != null" >
-        right_parent_code = #{rightParentCode,jdbcType=VARCHAR},
+      <if test="pername != null" >
+        pername = #{pername,jdbcType=VARCHAR},
       </if>
-      <if test="rightType != null" >
-        right_type = #{rightType,jdbcType=VARCHAR},
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
       </if>
-      <if test="rightText != null" >
-        right_text = #{rightText,jdbcType=VARCHAR},
+      <if test="permission != null" >
+        permission = #{permission,jdbcType=VARCHAR},
       </if>
       <if test="rightUrl != null" >
         right_url = #{rightUrl,jdbcType=VARCHAR},
       </if>
-      <if test="rightTip != null" >
-        right_tip = #{rightTip,jdbcType=VARCHAR},
-      </if>
     </set>
-    where right_code = #{rightCode,jdbcType=VARCHAR}
+    where perid = #{perid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Sysright" >
     update t_sys_right
-    set right_parent_code = #{rightParentCode,jdbcType=VARCHAR},
-      right_type = #{rightType,jdbcType=VARCHAR},
-      right_text = #{rightText,jdbcType=VARCHAR},
-      right_url = #{rightUrl,jdbcType=VARCHAR},
-      right_tip = #{rightTip,jdbcType=VARCHAR}
-    where right_code = #{rightCode,jdbcType=VARCHAR}
+    set pername = #{pername,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      permission = #{permission,jdbcType=VARCHAR},
+      right_url = #{rightUrl,jdbcType=VARCHAR}
+    where perid = #{perid,jdbcType=INTEGER}
   </update>
 </mapper>
