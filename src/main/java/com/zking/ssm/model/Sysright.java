@@ -1,62 +1,58 @@
 package com.zking.ssm.model;
 
 public class Sysright {
-//    权限表
-    private String rightCode;
+    private Integer perid;
 
-    private String rightParentCode;
+    private String pername;
 
-    private String rightType;
+    private Integer pid;
 
-    private String rightText;
+    private String permission;
 
     private String rightUrl;
 
-    private String rightTip;
-
-    public Sysright(String rightCode, String rightParentCode, String rightType, String rightText, String rightUrl, String rightTip) {
-        this.rightCode = rightCode;
-        this.rightParentCode = rightParentCode;
-        this.rightType = rightType;
-        this.rightText = rightText;
+    public Sysright(Integer perid, String pername, Integer pid, String permission, String rightUrl) {
+        this.perid = perid;
+        this.pername = pername;
+        this.pid = pid;
+        this.permission = permission;
         this.rightUrl = rightUrl;
-        this.rightTip = rightTip;
     }
 
     public Sysright() {
         super();
     }
 
-    public String getRightCode() {
-        return rightCode;
+    public Integer getPerid() {
+        return perid;
     }
 
-    public void setRightCode(String rightCode) {
-        this.rightCode = rightCode;
+    public void setPerid(Integer perid) {
+        this.perid = perid;
     }
 
-    public String getRightParentCode() {
-        return rightParentCode;
+    public String getPername() {
+        return pername;
     }
 
-    public void setRightParentCode(String rightParentCode) {
-        this.rightParentCode = rightParentCode;
+    public void setPername(String pername) {
+        this.pername = pername;
     }
 
-    public String getRightType() {
-        return rightType;
+    public Integer getPid() {
+        return pid;
     }
 
-    public void setRightType(String rightType) {
-        this.rightType = rightType;
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
-    public String getRightText() {
-        return rightText;
+    public String getPermission() {
+        return permission;
     }
 
-    public void setRightText(String rightText) {
-        this.rightText = rightText;
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 
     public String getRightUrl() {
@@ -65,13 +61,5 @@ public class Sysright {
 
     public void setRightUrl(String rightUrl) {
         this.rightUrl = rightUrl;
-    }
-
-    public String getRightTip() {
-        return rightTip;
-    }
-
-    public void setRightTip(String rightTip) {
-        this.rightTip = rightTip;
     }
 }
